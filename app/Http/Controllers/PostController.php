@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
 use App\Models\Post;
 use App\Models\Comment;
 use Illuminate\Http\Request;
@@ -54,5 +55,15 @@ class PostController extends Controller
                 'isActive'=>1
             ]);
         return 1;
+    }
+
+    public function category(Request $request){
+        $segmentCount = count($request->segments());
+        $catId = $request->segment($segmentCount);
+        if (!is_numeric($postId)) {
+            return "invalid input";
+        }
+       $posts= Category::find($catId)->posts;
+       return view('bases.category',['posts'=>$posts]);
     }
 }

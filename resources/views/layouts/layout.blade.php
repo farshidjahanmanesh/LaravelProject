@@ -39,6 +39,15 @@
                 <li><a href="#">اخبار </a>
 
                 </li>
+                @foreach($categories as $cat)
+                <li>
+                    <a href="{{route('categoryRoute',['id'=>$cat->id])}}">{{ $cat->catName }} </a>
+
+                </li>
+                @endforeach
+
+
+
                 <li><a href="#">لاگین</a>
 
                 </li>
@@ -109,7 +118,7 @@
         <!-- LOGO -->
         <div class="masterpb-container">
             <div class="logo-container col-xs-8">
-                <a href="index.html"><img src="{{asset('/img/logo.png')}}" alt="logo"></a>
+                <a href="index.html"><img src="/img/logo.png" alt="logo"></a>
             </div>
 
             {{--            <!-- SEARCH -->--}}
@@ -154,7 +163,7 @@
         <!-- ABOUT ME -->
         <div class="widget about-me">
             <div class="ab-image">
-                <img src="img/all-img/about-me.jpg" alt="about me">
+                <img src="/img/all-img/about-me.jpg" alt="about me">
             </div>
             <div class="ad-text">
                 <span class="signing">تبلیغات موضوع </span>
@@ -173,7 +182,7 @@
             <div class="posts-container">
                 @foreach($last_posts as $post)
                     <div class="item">
-                        <img src="img/post/{{$post->picture}}" alt="post 1" class="post-image" style="height: 100px;width: 85px">
+                        <img src="/img/post/{{$post->picture}}" alt="post 1" class="post-image" style="height: 100px;width: 85px">
                         <div class="info-post">
                             <h5><a href="{{route('selectPost',['id'=>$post->id])}}">  {{$post->title}}     </a></h5>
                             <span class="date">{{$post->created_at}}</span>
