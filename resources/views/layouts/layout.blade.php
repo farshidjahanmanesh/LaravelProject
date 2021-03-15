@@ -48,7 +48,7 @@
 
 
 
-                <li><a href="#">لاگین</a>
+                <li><a href="{{ route('login') }}">لاگین</a>
 
                 </li>
                 <li><a href="about-us.html">درباره ما</a></li>

@@ -21,10 +21,15 @@ Route::get('/',[PostController::class,'index'])->name('index');
 Route::get('/Articles/{id}',[PostController::class,'post'])->name('selectPost');
 
 Route::get('/setComments',[PostController::class,'saveComment']);
-Route::get('Category/{id}',[PostController::class,'category'])->name('categoryRoute');
+Route::get('/Category/{id}',[PostController::class,'category'])->name('categoryRoute');
 
 Route::post('/newsLetter',[SiteController::class,'saveNewsLetter'])->name('newsLetter');
 
+Route::get('/login', function () {
+    return view('bases.login');
+})->name('login');
+
+Route::post('/login',[SiteController::class,'login'])->name('login');
 
 Route::fallback(function(){
 return "404 error";
