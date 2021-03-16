@@ -111,6 +111,7 @@
                 url: '/setComments',
                 data: formData,
                 success: function (data) {
+                    $('#messageError').html("پیغام شما با موفقیت ثبت شد");
                 }
             });
         }

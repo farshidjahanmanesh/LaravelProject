@@ -7,13 +7,11 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use App\Models\NewsLetter;
 use Illuminate\Validation\ValidationException;
-
+use Illuminate\Support\Facades\Hash;
 class SiteController extends Controller
 {
     public function login(Request $request)
     {
-
-        //Auth::logout();
         $inputs = $request->all();
         try {
             $this->validate($request, [
@@ -30,6 +28,31 @@ class SiteController extends Controller
             $error = 'your username or password is incorrect';
             return view('bases.login', ['errorLogin' => $error]);
         }
+    }
+
+    public function Register(Request $request){
+
+
+        $inputs = $request->all();
+        try{
+            $this->validate($request, [
+                'email' => ['required', 'email', 'unique:users'],
+                'password' => 'required_with:confirmPassword|same:confirmPassword',
+                'confirmPassword' => 'required',
+                'familyName' => 'required'
+            ]);
+        }catch (\Throwable $e){
+            return $e->getMessage();
+        }
+
+        $createdUser= User::create([
+            'name' => $inputs['familyName'],
+            'password' => Hash::make($inputs['password']),
+            'email' => $inputs['email']
+        ]);
+
+        Auth::login($createdUser,false);
+        Return view('bases.index');
     }
 
 

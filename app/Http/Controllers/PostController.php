@@ -60,7 +60,7 @@ class PostController extends Controller
     public function category(Request $request){
         $segmentCount = count($request->segments());
         $catId = $request->segment($segmentCount);
-        if (!is_numeric($postId)) {
+        if (!is_numeric($catId)) {
             return "invalid input";
         }
        $posts= Category::find($catId)->posts;
