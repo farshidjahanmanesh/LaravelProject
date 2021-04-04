@@ -49,6 +49,21 @@
 
                     @auth
                         <li><a href="{{ route('logout') }}">خروج</a></li>
+
+                        @if (Auth::user()->role == 'BaseAdmin')
+                            <li>
+                                <a href="{{ Route('BaseAdmin') }}">صفحه ادمین</a>
+                            </li>
+                        @elseif(Auth::user()->role == 'سر دبیر')
+                            <li>
+                                <a href="{{ Route('BaseAdmin') }}">bla bla bla</a>
+                            </li>
+                        @else
+                            <li>
+                                <a href="{{ Route('ArticleManagement') }}">پنل کاربری</a>
+                            </li>
+                        @endif
+
                     @endauth
                     @guest
                         <li><a href="{{ route('login') }}">لاگین</a></li>

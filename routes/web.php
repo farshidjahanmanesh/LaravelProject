@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ArticleManagementController;
 use App\Http\Controllers\BaseAdminController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PostController;
@@ -47,18 +48,13 @@ Route::get('/baseAdmin/UserAccess/{id}',[BaseAdminController::class,'roleAccess'
 Route::post('/baseAdmin/EdituserAccess',[BaseAdminController::class,'EditAccess'])
 ->name('EditAccess');
 
+Route::get('/ArticleManagement',[ArticleManagementController::class,'index'])->name('ArticleManagement');
+Route::get('/ArticleManagement/deletePost/{id}',[ArticleManagementController::class,'delete'])->name('ArticleManagement.Delete');
+Route::get('/ArticleManagement/createPost',[ArticleManagementController::class,'create'])->name('ArticleManagement.Create');
+Route::post('/ArticleManagement/createArticle',[ArticleManagementController::class,'createArticle'])->name('ArticleManagement.createArticle');
 
 Route::fallback(function(){
 return "404 error";
 });
 
 
-
-
-
-
-
-use Illuminate\Support\Facades\Auth;
-Route::get('/test1', function () {
-return Auth::user()->role;
-});
