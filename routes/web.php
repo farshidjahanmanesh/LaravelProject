@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\BaseAdminController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\SiteController;
@@ -31,6 +32,33 @@ Route::get('/login', function () {
 
 Route::post('/login',[SiteController::class,'login'])->name('login');
 
+Route::get('/register', function () {
+    return view('bases.register');
+})->name('register');
+
+Route::post('/register',[SiteController::class,'register'])->name('register');
+
+Route::get('/logout',[SiteController::class,'logout'])->name('logout');
+
+
+Route::get('/baseAdmin',[BaseAdminController::class,'index'])->name('BaseAdmin');
+Route::get('/baseAdmin/UserAccess/{id}',[BaseAdminController::class,'roleAccess'])
+->name('userAccess');
+Route::post('/baseAdmin/EdituserAccess',[BaseAdminController::class,'EditAccess'])
+->name('EditAccess');
+
+
 Route::fallback(function(){
 return "404 error";
+});
+
+
+
+
+
+
+
+use Illuminate\Support\Facades\Auth;
+Route::get('/test1', function () {
+return Auth::user()->role;
 });

@@ -23,7 +23,7 @@ class SiteController extends Controller
         }
 
         if (Auth::attempt(['email' => $inputs['email'], 'password' => $inputs['password']])) {
-            return "salam";
+            return redirect()->route('index');
         }else{
             $error = 'your username or password is incorrect';
             return view('bases.login', ['errorLogin' => $error]);
@@ -31,8 +31,6 @@ class SiteController extends Controller
     }
 
     public function Register(Request $request){
-
-
         $inputs = $request->all();
         try{
             $this->validate($request, [
@@ -52,9 +50,13 @@ class SiteController extends Controller
         ]);
 
         Auth::login($createdUser,false);
-        Return view('bases.index');
+        Return redirect()->route('index');
     }
 
+    public function logout(){
+        Auth::logout();
+        return redirect()->route('index');
+    }
 
     public function saveNewsLetter(Request $request)
     {
