@@ -45,7 +45,6 @@ class BaseAdminController extends Controller
         $userId=$inputs['id'];
         $user=User::find($userId);
         $roleName=$inputs["roleId"];
-
         $user->role=$roleName;
         $user->save();
         return redirect()->route("BaseAdmin");

@@ -31,6 +31,9 @@
                     <td>
                         <a class="btn btn-danger" href="{{ Route('ArticleManagement.Delete',['id'=>$post->id]) }}">حذف پست</a>
                     </td>
+                    <td>
+                        <a class="btn btn-primary" href="{{ Route('ArticleManagement.Edit',['id'=>$post->id]) }}">تغییر در پست</a>
+                    </td>
                     @php
                         $counter++;
                     @endphp

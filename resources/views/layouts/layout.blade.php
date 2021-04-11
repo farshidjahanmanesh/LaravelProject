@@ -37,9 +37,6 @@
                     <li><a href="/" class="active">صفحه اصلی </a>
 
                     </li>
-                    <li><a href="#">اخبار </a>
-
-                    </li>
                     @foreach ($categories as $cat)
                         <li>
                             <a href="{{ route('categoryRoute', ['id' => $cat->id]) }}">{{ $cat->catName }} </a>
@@ -56,7 +53,10 @@
                             </li>
                         @elseif(Auth::user()->role == 'سر دبیر')
                             <li>
-                                <a href="{{ Route('BaseAdmin') }}">bla bla bla</a>
+                                <a href="{{ Route('Editor.CheckPosts') }}">بررسی مقالات</a>
+                            </li>
+                            <li>
+                                <a href="{{ Route('Editor.CategoryCreate') }}">دسته بندی ها (مدیریت)</a>
                             </li>
                         @else
                             <li>
@@ -162,10 +162,42 @@
 
     <section class="masterpb-container content-posts">
 
-        <!-- INSTAGRAM -->
+        @guest
+        <div class="col-xs-12" style="margin-bottom: 50px;">
 
-        <!--ترجمه شده توسط مرجع تخصصی برنامه نویسان-->
-        <!-- CONTENT -->
+            <h2>اخبار برگزیده</h2>
+            @if (count($editorSelectedPost)==0)
+                <p>هیچ خبر برگزیده ای وجود ندارد</p>
+            @endif
+            <div class="row">
+                @php
+                    $i = 0;
+                @endphp
+                @foreach ($editorSelectedPost as $post)
+                    @if ($i % 2 == 0)
+                        <div class="col-xs-3" style="float: right;margin-left: 50px;">
+                            <h4><a href="{{ route('selectPost', ['id' => $post->id]) }}">{{ $post->title }}</a></h4>
+                            <img src="/img/post/{{ $post->picture }}" width="200" height="200" />
+                        </div>
+                    @endif
+
+                    @if ($i % 2 == 1)
+                        <div class="col-xs-3">
+                            <h4><a href="{{ route('selectPost', ['id' => $post->id]) }}">{{ $post->title }}</a></h4>
+                            <img src="/img/post/{{ $post->picture }}" width="200" height="200" />
+                        </div>
+                    @endif
+                    @php
+                        $i++;
+                    @endphp
+                @endforeach
+
+
+            </div>
+
+        </div>
+        @endguest
+
 
         <div class="content page-sidebar-right col-xs-8">
             @yield('mainSection')

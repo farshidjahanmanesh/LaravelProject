@@ -27,10 +27,13 @@ class LayoutDataProvider extends ServiceProvider
     public function boot()
     {
         View::composer('*', function ($view) {
-            $posts = Post::orderBy('created_at', 'DESC')->take(5)->get();
+            $posts = Post::where('isActive','=',true)->orderBy('created_at', 'DESC')->take(5)->get();
             $category = Category::get();
             $view->with('categories', $category);
             $view->with('last_posts', $posts);
+
+            $editorPosts=Post::where('isSelectByEditor','=',true)->orderBy('created_at', 'DESC')->take(6)->get();
+            $view->with('editorSelectedPost',$editorPosts);
         });
     }
 }

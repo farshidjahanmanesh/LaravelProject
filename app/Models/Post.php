@@ -16,7 +16,8 @@ class Post extends Model
             'user_id',
             'title',
             'picture',
-            'Category_id'
+            'Category_id',
+            'isSelectByEditor'
         ];
     public function user(){
         return $this->belongsTo(User::class);

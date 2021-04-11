@@ -2,6 +2,8 @@
 
 use App\Http\Controllers\ArticleManagementController;
 use App\Http\Controllers\BaseAdminController;
+use App\Http\Controllers\ChEditorController;
+use App\Http\Controllers\EditorController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\SiteController;
@@ -52,6 +54,15 @@ Route::get('/ArticleManagement',[ArticleManagementController::class,'index'])->n
 Route::get('/ArticleManagement/deletePost/{id}',[ArticleManagementController::class,'delete'])->name('ArticleManagement.Delete');
 Route::get('/ArticleManagement/createPost',[ArticleManagementController::class,'create'])->name('ArticleManagement.Create');
 Route::post('/ArticleManagement/createArticle',[ArticleManagementController::class,'createArticle'])->name('ArticleManagement.createArticle');
+Route::get('/ArticleManagement/EditPost/{id}',[ArticleManagementController::class,'EditArticle'])->name('ArticleManagement.Edit');
+Route::post('/ArticleManagement/EditPost',[ArticleManagementController::class,'EditArticlePost'])->name('ArticleManagement.EditPost');
+
+
+Route::get('/Editor',[EditorController::class,'CheckPosts'])->name('Editor.CheckPosts');
+Route::get('/CreateCategory',[EditorController::class,'CreateCategory'])->name('Editor.CategoryCreate');
+Route::post('/CreateCategory',[EditorController::class,'CreateCategoryPost'])->name('Editor.CategoryCreatePostMethod');
+Route::get('/changeState',[EditorController::class,'ChangePostState']);
+Route::get('/changeEditorState',[EditorController::class,'changeEditorState']);
 
 Route::fallback(function(){
 return "404 error";

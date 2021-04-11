@@ -18,9 +18,9 @@ class PostController extends Controller
         {
             $pageNumber=$request->input('pageNumber')*5;
         }
-        $postsCount=Post::count();
+        $postsCount=Post::where('isActive','=',true)->count();
         $maxPageCount=$postsCount/5;
-        $posts = Post::orderBy('created_at', 'DESC')->skip($pageNumber)->take(5)->get();
+        $posts = Post::where('isActive','=',true)->orderBy('created_at', 'DESC')->skip($pageNumber)->take(5)->get();
         return view('bases.index', ['posts' => $posts,'pageNumber'=>$request->input('pageNumber'),'pageCount'=>$maxPageCount]);
     }
 
@@ -63,7 +63,8 @@ class PostController extends Controller
         if (!is_numeric($catId)) {
             return "invalid input";
         }
-       $posts= Category::find($catId)->posts;
+        $posts=Post::where('Category_id','=',$catId)->where('isActive','=',true)->orderBy('created_at', 'DESC')->get();
+      // $posts= Category::find($catId)->orderBy('created_at', 'DESC')->posts;
        return view('bases.category',['posts'=>$posts]);
     }
 }
