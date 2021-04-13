@@ -33,7 +33,7 @@
         <!-- MENU DESKTOP -->
         <nav class="menu-desktop menu-sticky">
             <div class="masterpb-container">
-                <ul class="masterpb-menu col-xs-8">
+                <ul class="masterpb-menu col-xs-12">
                     <li><a href="/" class="active">صفحه اصلی </a>
 
                     </li>
@@ -51,6 +51,10 @@
                             <li>
                                 <a href="{{ Route('BaseAdmin') }}">صفحه ادمین</a>
                             </li>
+                            <li>
+                                <a href="{{ Route('SendEmail') }}">ارسال ایمیل برای کاربران</a>
+                            </li>
+
                         @elseif(Auth::user()->role == 'سر دبیر')
                             <li>
                                 <a href="{{ Route('Editor.CheckPosts') }}">بررسی مقالات</a>
@@ -162,7 +166,6 @@
 
     <section class="masterpb-container content-posts">
 
-        @guest
         <div class="col-xs-12" style="margin-bottom: 50px;">
 
             <h2>اخبار برگزیده</h2>
@@ -196,13 +199,10 @@
             </div>
 
         </div>
-        @endguest
 
 
         <div class="content page-sidebar-right col-xs-8">
             @yield('mainSection')
-
-
 
         </div>
 

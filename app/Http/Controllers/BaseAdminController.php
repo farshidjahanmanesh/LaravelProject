@@ -3,11 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Models\Category;
+use App\Models\NewsLetter;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use Symfony\Component\Process\InputStream;
+use Illuminate\Support\Facades\Mail;
 
 class BaseAdminController extends Controller
 {
@@ -50,5 +52,27 @@ class BaseAdminController extends Controller
         return redirect()->route("BaseAdmin");
     }
 
+    public function SendEmail()
+    {
+        return view('BaseAdmin.SendEmail');
+    }
+
+    public function SendEmailToUsers(Request $request){
+        $subjectText=$request['subject'];
+        $text=$request['emailText'];
+
+        $users=NewsLetter::all();
+        $data = array("body" => $text);
+        foreach($users as $user){
+
+            Mail::send('mail', $data, function($message)use($subjectText,$user) {
+                $message->to($user->email, 'کاربر گرامی')->subject
+                   ($subjectText);
+                   $message->from('samicancel2@gmail.com','سایت خبری ما');
+             });
+
+        }
+        return redirect()->route('BaseAdmin');
+    }
 
 }

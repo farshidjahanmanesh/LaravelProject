@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\SiteController;
 use Illuminate\Http\Request;
-
+use Illuminate\Support\Facades\Mail;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -19,6 +19,8 @@ use Illuminate\Http\Request;
 | contains the "web" middleware group. Now create something great!
 |
 */
+
+
 
 Route::get('/',[PostController::class,'index'])->name('index');
 
@@ -49,6 +51,9 @@ Route::get('/baseAdmin/UserAccess/{id}',[BaseAdminController::class,'roleAccess'
 ->name('userAccess');
 Route::post('/baseAdmin/EdituserAccess',[BaseAdminController::class,'EditAccess'])
 ->name('EditAccess');
+Route::get('/baseAdmin/SendMail', [BaseAdminController::class,'SendEmail'])->name('SendEmail');
+Route::post('/baseAdmin/SendMail', [BaseAdminController::class,'SendEmailToUsers'])->name('SendEmailPost');
+
 
 Route::get('/ArticleManagement',[ArticleManagementController::class,'index'])->name('ArticleManagement');
 Route::get('/ArticleManagement/deletePost/{id}',[ArticleManagementController::class,'delete'])->name('ArticleManagement.Delete');
