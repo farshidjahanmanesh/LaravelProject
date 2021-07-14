@@ -7,6 +7,7 @@ use App\Http\Controllers\EditorController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\SiteController;
+use App\Http\Controllers\EditerSpecialController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 /*
@@ -69,6 +70,12 @@ Route::post('/CreateCategory',[EditorController::class,'CreateCategoryPost'])->n
 Route::get('/changeState',[EditorController::class,'ChangePostState']);
 Route::get('/changeEditorState',[EditorController::class,'changeEditorState']);
 
+Route::get('/Search',[SiteController::class,'Search'])->name('Search');
+
+
+
+Route::get('/EditorSpecial',[EditerSpecialController::class,'index'])->name('EditorSpecial.CheckPosts');
+Route::get('/changeStatePost',[EditerSpecialController::class,'ChangePostState']);
 Route::fallback(function(){
 return "404 error";
 });

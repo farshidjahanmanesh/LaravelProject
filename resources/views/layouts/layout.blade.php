@@ -4,7 +4,7 @@
 
 <head>
     <meta charset="utf-8">
-    <title>Master.PB - Personal Blog HTML Template</title>
+    <title>خبرگزاری نوین </title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="shortcut icon" type="image/png" href="{{ asset('/img/favicon.png') }}" />
     <!-- STYLES -->
@@ -62,6 +62,11 @@
                             <li>
                                 <a href="{{ Route('Editor.CategoryCreate') }}">دسته بندی ها (مدیریت)</a>
                             </li>
+                        @elseif (str_starts_with(Auth::user()->role, "سر دبیر"))
+                            <li>
+                                <a href="{{ Route('EditorSpecial.CheckPosts') }}">بررسی مقالات</a>
+                            </li>
+
                         @else
                             <li>
                                 <a href="{{ Route('ArticleManagement') }}">پنل کاربری</a>
@@ -84,54 +89,7 @@
 
 
         <!-- MENU MOBILE -->
-        {{-- <div class="menu-responsive-container"> --}}
-        {{-- <div class="open-menu-responsive">|||</div> --}}
-        {{-- <div class="close-menu-responsive">|</div> --}}
-        {{-- <div class="menu-responsive"> --}}
-        {{-- <ul class="masterpb-menu"> --}}
-        {{-- <li><a href="#" class="active">صفحه اصلی <i class="icon-arrow-down8"></i></a> --}}
-        {{-- <ul class="submenu"> --}}
-        {{-- <li><a href="home-1-column.html">صفحه اصلی یک ستونه</a></li> --}}
-        {{-- <li><a href="index.html" class="active">صفحه اصلی یک ستونه + اسلایدر</a></li> --}}
-        {{-- <li><a href="home-2-columns-with-sidebar.html">صفحه اصلی دو ستونه + اسلایدر</a></li> --}}
-        {{-- <li><a href="home-2-columns.html">صفحه اصلی دو ستونه</a></li> --}}
-        {{-- <li><a href="home-3-columns.html">صفحه اصلی سه ستونه</a></li> --}}
-        {{-- </ul> --}}
-        {{-- </li> --}}
-        {{-- <li><a href="#">FEATURES <i class="icon-arrow-down8"></i></a> --}}
-        {{-- <ul class="submenu"> --}}
-        {{-- <li><a href="page.html">صفحه</a></li> --}}
-        {{-- <li><a href="page-with-left-sidebar.html">صفحه + سایدبار راست</a></li> --}}
-        {{-- <li><a href="page-with-right-sidebar.html">صفحه + ستون سمت چپ</a></li> --}}
-        {{-- <li><a href="post.html">ارسال های کامل عریض</a></li> --}}
-        {{-- <li><a href="post-with-left-sidebar.html">ارسال های + سایدبار راست</a></li> --}}
-        {{-- <li><a href="post-with-right-sidebar.html">ارسال های + ستون سمت چپ</a></li> --}}
-        {{-- <li><a href="no-sticky.html">منوی موضوع</a></li> --}}
-        {{-- <li><a href="no-slider.html">اسلایدر</a></li> --}}
-        {{-- <li><a href="#">زیرمنو <i class="icon-arrow-left8"></i></a> --}}
-        {{-- <ul class="submenu"> --}}
-        {{-- <li><a href="#">آیتم 1</a></li> --}}
-        {{-- <li><a href="#">آیتم 2</a></li> --}}
-        {{-- <li><a href="#">آیتم 3</a></li> --}}
-        {{-- <li><a href="#">آیتم 4</a></li> --}}
-        {{-- </ul> --}}
-        {{-- </li> --}}
-        {{-- </ul> --}}
-        {{-- </li> --}}
-        {{-- <li><a href="#">وبلاگ <i class="icon-arrow-down8"></i></a> --}}
-        {{-- <ul class="submenu"> --}}
-        {{-- <li><a href="blog-1-column.html">وبلاگ 1 ستون</a></li> --}}
-        {{-- <li><a href="blog-1-column-with-sidebar.html">وبلاگ + نوار کناری</a></li> --}}
-        {{-- <li><a href="blog-2-columns-with-sidebar.html">وبلاگ 2 ستون + سایدبار</a></li> --}}
-        {{-- <li><a href="blog-2-columns.html">وبلاگ 2 ستون</a></li> --}}
-        {{-- <li><a href="blog-3-columns.html">وبلاگ 3 ستون</a></li> --}}
-        {{-- </ul> --}}
-        {{-- </li> --}}
-        {{-- <li><a href="about-us.html">درباره ما</a></li> --}}
-        {{-- <li><a href="contact.html">تماس با ما</a></li> --}}
-        {{-- </ul> --}}
-        {{-- </div> --}}
-        {{-- </div> <!-- # menu responsive container --> --}}
+
 
 
 
@@ -140,19 +98,20 @@
 
             <!-- LOGO -->
             <div class="masterpb-container">
-                <div class="logo-container col-xs-8">
-                    <a href="index.html"><img src="/img/logo.png" alt="logo"></a>
+                <div class="logo-container col-xs-6">
+                    <a href="index.html"><img src="/img/nawennews-logodesign.jpg" height="220" alt="logo"
+                            style="margin-right: 20%"></a>
                 </div>
 
                 {{-- <!-- SEARCH --> --}}
-                {{-- <div class="masterpb-search col-xs-4"> --}}
-                {{-- <form> --}}
-                {{-- <div class="form-group-search"> --}}
-                {{-- <input type="جستجو کردن" class="search-field"> --}}
-                {{-- <button type="ارسال" class="search-btn"><i class="icon-search4"></i></button> --}}
-                {{-- </div> --}}
-                {{-- </form> --}}
-                {{-- </div> --}}
+                <div class="masterpb-search col-xs-4" style="margin-right: 50px">
+                    <form action="{{ Route('Search') }}" method="get">
+                        <div class="form-group-search">
+                            <input name="SearchName" type="جستجو کردن" class="search-field" style="width: 300px">
+                            <button class="search-btn"><i class="icon-search4"></i></button>
+                        </div>
+                    </form>
+                </div>
 
             </div> <!-- #masterpb-container -->
         </div> <!-- #box-logo -->
@@ -169,7 +128,7 @@
         <div class="col-xs-12" style="margin-bottom: 50px;">
 
             <h2>اخبار برگزیده</h2>
-            @if (count($editorSelectedPost)==0)
+            @if (count($editorSelectedPost) == 0)
                 <p>هیچ خبر برگزیده ای وجود ندارد</p>
             @endif
             <div class="row">
@@ -179,14 +138,16 @@
                 @foreach ($editorSelectedPost as $post)
                     @if ($i % 2 == 0)
                         <div class="col-xs-3" style="float: right;margin-left: 50px;">
-                            <h4><a href="{{ route('selectPost', ['id' => $post->id]) }}">{{ $post->title }}</a></h4>
+                            <h4><a href="{{ route('selectPost', ['id' => $post->id]) }}">{{ $post->title }}</a>
+                            </h4>
                             <img src="/img/post/{{ $post->picture }}" width="200" height="200" />
                         </div>
                     @endif
 
                     @if ($i % 2 == 1)
                         <div class="col-xs-3">
-                            <h4><a href="{{ route('selectPost', ['id' => $post->id]) }}">{{ $post->title }}</a></h4>
+                            <h4><a href="{{ route('selectPost', ['id' => $post->id]) }}">{{ $post->title }}</a>
+                            </h4>
                             <img src="/img/post/{{ $post->picture }}" width="200" height="200" />
                         </div>
                     @endif
@@ -214,11 +175,13 @@
             <!-- ABOUT ME -->
             <div class="widget about-me">
                 <div class="ab-image">
-                    <img src="/img/all-img/about-me.jpg" alt="about me">
+                    <img src="/img/nawennews-logodesign.jpg" alt="about me">
                 </div>
                 <div class="ad-text">
-                    <span class="signing">تبلیغات موضوع </span>
-                    <p>لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است. </p>
+                    <span class="signing">درباره ما </span>
+                    <p>
+                        خبرگزاری نوین جدید ترین خبر گزاری مرتبط با امور دانشجویان است.
+                    </p>
                 </div>
             </div>
 
@@ -253,13 +216,6 @@
 
 
 
-
-            <!-- ADVERTISING -->
-            <div class="widget advertising">
-                <div class="advertising-container">
-                    <img src="img/350x300.png" alt="banner 350x300">
-                </div>
-            </div>
 
 
             <!-- NEWSLETTER -->
@@ -297,13 +253,10 @@
         <div class="footer-top">
             <div class="masterpb-container">
                 <div class="logo-footer">
-                    <a href="index.html"><img src="img/logo-footer.png" alt="logo"></a>
+                    <a href="index.html"><img src="img/nawennews-logodesign.jpg" alt="logo" height="100px"></a>
                 </div>
                 <div class="subtitle-logo">
-                    <p class="color-text first">لورم ایپسوم متن</p>
-                    <p class="black-text">لورم ایپسوم متن</p>
-                    <p class="color-text">لورم ایپسوم متن</p>
-                    <p class="black-text last">لورم ایپسوم متن</p>
+                    <p class="color-text first">خبرگزاری نوین</p>
                 </div>
                 <div class="box-social">
                     <div class="conteiner-social">
@@ -324,7 +277,7 @@
         <!-- FOOTER BOTTOM -->
         <div class="footer-bottom">
             <div class="masterpb-container">
-                <span class="copyright">کلیه حقوق مادی و معنوی برای مجموعه برنامه نویسان محفوظ می باشد . هر گونه کپی
+                <span class="copyright">کلیه حقوق مادی و معنوی برای مجموعه خبر نوین محفوظ می باشد . هر گونه کپی
                     برداری از محتوای آموزشی با ذکر منبع مجاز می باشد.<a href="#"></a> </span>
                 <span class="backtotop">TOP <i class="icon-arrow-up7"></i></span>
             </div>

@@ -105,7 +105,8 @@ class ArticleManagementController extends Controller
             'isActive' => false,
             'picture' => $url,
             'user_id' => $userId,
-            'Category_id' => $category->id
+            'Category_id' => $category->id,
+            'isSelectByEditor'=>false
         ]);
 
         return redirect()->route('ArticleManagement');
