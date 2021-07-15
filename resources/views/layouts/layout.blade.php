@@ -296,7 +296,22 @@
     <script src=" {{ asset('/js/jquery-1.12.4.min.js') }}"></script>
     <script src="{{ asset('/js/slippry.js') }}"></script>
     <script src="{{ asset('/js/main.js') }}"></script>
-
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+    <script>
+        function like(id) {
+            var formData = {
+                id: id
+            };
+            $.ajax({
+                type: 'get',
+                url: '/like',
+                data: formData,
+                success: function(data) {
+                    $('#count').html(data);
+                }
+            });
+        }
+    </script>
     @yield('scripts')
     <!--ترجمه شده توسط مرجع تخصصی برنامه نویسان-->
 </body>

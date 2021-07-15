@@ -8,18 +8,20 @@
 
             <!-- ARTICLE 1 -->
             <article>
-                <h2><a href="#">{{$post->title}}</a></h2>
+                <h2><a href="#">{{ $post->title }}</a></h2>
                 <div class="post-image">
-                    <img src="{{asset('img/post/'.$post->picture)}}" alt="post image 1">
+                    <img src="{{ asset('img/post/' . $post->picture) }}" alt="post image 1">
                 </div>
                 <div class="box-data-info">
-                    <span class="date info">{{$post->title}}</span>
+                    <span class="date info">{{ $post->title }}</span>
                 </div>
-                <div class="post-text">
-                    <p class="text">{{$post->text}}</p>
 
-                    <p>نویسنده : {{$user->name}}</p>
-                    <p>تاریخ انتشار : {{$post->created_at}}</p>
+                <div class="post-text">
+                    <p class="text">{{ $post->text }}</p>
+
+                    <p>نویسنده : {{ $user->name }}</p>
+                    <p>تاریخ انتشار : {{ $post->created_at }}</p>
+
                     <div class="social-post">
                         <a href="#"><i class="icon-facebook5"></i></a>
                         <a href="#"><i class="icon-twitter4"></i></a>
@@ -30,28 +32,48 @@
 
                 </div>
 
+                <div class="post-info">
+                    <p style="color: red">
+                        تعداد لایک ها :
+                        <span id="count">
+                            {{ count($post->Likes) }}
+                        </span>
+                    </p>
+                    @auth
+                        <div style="font-size:18px">
+                            <a onclick="like({{ $post->id }})" style="cursor: pointer">
+                                <img src="https://img.icons8.com/clouds/100/000000/facebook-like.png"/>
+                            </a>
+                        </div>
+                    @endauth
+                    @guest
+                        <div>
+                            برای امکان لایک کردن مقالات، باید وارد شوید
+                        </div>
+                    @endguest
+                </div>
+
+
             </article>
 
 
-            <!--ترجمه شده توسط مرجع تخصصی برنامه نویسان-->
 
             <!-- COMMENTS -->
             <div class="comments">
-                <h2>{{count($comments)}} دیدگاه</h2>
-                @foreach($comments as $comment)
+                <h2>{{ count($comments) }} دیدگاه</h2>
+                @foreach ($comments as $comment)
                     <div class="comments-list">
                         <div class="main-comment">
                             <div class="comment-image-author">
-                                <img src="{{asset('/img/all-img/img-profile-1.jpg')}}">
+                                <img src="{{ asset('/img/all-img/img-profile-1.jpg') }}">
                             </div>
                             <div class="comment-info">
-                                <div class="comment-name-date"><span
-                                        class="comment-name">{{$comment->name}} </span><span
-                                        class="comment-date">{{$comment->created_at}}</span>
+                                <div class="comment-name-date"><span class="comment-name">{{ $comment->name }} </span><span
+                                        class="comment-date">{{ $comment->created_at }}</span>
                                     <div class="clearfix"></div>
                                 </div>
                                 <span class="comment-description">
-                                    {{$comment->text}}
+                                    {{ $comment->text }}
                                     <i class="icon-arrow-right2"></i></span>
                             </div>
                             <div class="clearfix"></div>
@@ -88,21 +110,22 @@
 @section('scripts')
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
     <script>
-        function isEmptyOrSpaces(str){
+        function isEmptyOrSpaces(str) {
             return str === null || str.match(/^ *$/) !== null;
         }
+
         function getMessage() {
-            if(isEmptyOrSpaces($('#name').val())||
-                isEmptyOrSpaces($('#email').val())||
-                isEmptyOrSpaces($('#text').val())){
+            if (isEmptyOrSpaces($('#name').val()) ||
+                isEmptyOrSpaces($('#email').val()) ||
+                isEmptyOrSpaces($('#text').val())) {
                 $('#messageError').html("لطفا تمامی فیلد ها را پر کنید");
                 return;
             }
             var formData = {
                 name: $('#name').val(),
-                email : $('#email').val(),
-                text : $('#text').val(),
-                postId : {{$post->id}}
+                email: $('#email').val(),
+                text: $('#text').val(),
+                postId: {{ $post->id }}
             };
 
 
@@ -110,7 +133,7 @@
                 type: 'get',
                 url: '/setComments',
                 data: formData,
-                success: function (data) {
+                success: function(data) {
                     $('#messageError').html("پیغام شما با موفقیت ثبت شد");
                 }
             });

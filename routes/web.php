@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\SiteController;
 use App\Http\Controllers\EditerSpecialController;
+use App\Http\Controllers\LikeController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 /*
@@ -72,7 +73,7 @@ Route::get('/changeEditorState',[EditorController::class,'changeEditorState']);
 
 Route::get('/Search',[SiteController::class,'Search'])->name('Search');
 
-
+Route::get('/like',[LikeController::class,'saveLike'])->name('like');
 
 Route::get('/EditorSpecial',[EditerSpecialController::class,'index'])->name('EditorSpecial.CheckPosts');
 Route::get('/changeStatePost',[EditerSpecialController::class,'ChangePostState']);
